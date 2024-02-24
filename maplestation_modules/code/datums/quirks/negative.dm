@@ -90,3 +90,27 @@
 	INVOKE_ASYNC(quirk_holder, TYPE_PROC_REF(/mob/living, pain_emote))
 	quirk_holder.add_mood_event("bad_touch", /datum/mood_event/very_bad_touch)
 	COOLDOWN_START(src, time_since_last_touch, 30 SECONDS)
+
+/datum/quirk/nerve_stapled
+	name = "Nerve Stapled"
+	desc = "Because of a previous incident, you have been nerve stapled. You permenantly have low mood with no way of increasing it."
+	icon = FA_ICON_TIRED
+	value = -4
+	//mob_trait = TRAIT_CAFFEINE_LOVER
+	quirk_flags = QUIRK_HUMAN_ONLY
+	gain_text = "<span class='danger'>You feel fragile.</span>"
+	lose_text = "<span class='notice'>You feel less delicate.</span>"
+	medical_record_text = "Patient has Allodynia, and is extremely sensitive to touch, pain, and similar stimuli."
+
+/datum/quirk/nerve_stapled/add()
+	var/mob/living/carbon/carbon_holder = quirk_holder
+	if(istype(carbon_holder))
+		carbon_holder.set_pain_mod(PAIN_MOD_QUIRK, 1.2)
+	RegisterSignal(quirk_holder, list(COMSIG_LIVING_GET_PULLED, COMSIG_CARBON_HELP_ACT), PROC_REF(cause_body_pain))
+
+/datum/quirk/nerve_stapled/remove()
+	var/mob/living/carbon/carbon_holder = quirk_holder
+	if(istype(carbon_holder))
+		carbon_holder.unset_pain_mod(PAIN_MOD_QUIRK)
+	UnregisterSignal(quirk_holder, list(COMSIG_LIVING_GET_PULLED, COMSIG_CARBON_HELP_ACT))
+
