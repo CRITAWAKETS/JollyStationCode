@@ -51,15 +51,13 @@
 	name = "Virtual Domain Unexplored Location"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "bit_ruin"
-	area_flags = /area/virtual_domain::area_flags
-	area_flags_mapping = /area/virtual_domain::area_flags_mapping
+	area_flags = UNIQUE_AREA | NOTELEPORT | EVENT_PROTECTED | HIDDEN_AREA
 
 /area/space/virtual_domain
 	name = "Virtual Domain Space"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "bit_space"
-	area_flags = /area/virtual_domain::area_flags
-	area_flags_mapping = /area/virtual_domain::area_flags_mapping
+	area_flags = UNIQUE_AREA | NOTELEPORT | EVENT_PROTECTED | HIDDEN_AREA
 
 ///Areas that virtual entities should not be in
 
